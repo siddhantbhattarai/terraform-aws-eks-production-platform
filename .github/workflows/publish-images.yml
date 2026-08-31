@@ -17,17 +17,29 @@ env:
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
+  configuration:
+    runs-on: ubuntu-latest
+    outputs:
+      aws_oidc_ready: ${{ steps.verify.outputs.aws_oidc_ready }}
+    steps:
+      - id: verify
+        name: Verify AWS OIDC configuration
+        env:
+          ROLE_TO_ASSUME: ${{ vars.AWS_ROLE_TO_ASSUME }}
+        run: |
+          if [ -z "$ROLE_TO_ASSUME" ]; then
+            echo "::warning::Image publishing was skipped: set the AWS_ROLE_TO_ASSUME repository variable after creating the GitHub OIDC IAM role."
+            echo "aws_oidc_ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "aws_oidc_ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
   build-and-push:
+    needs: configuration
+    if: needs.configuration.outputs.aws_oidc_ready == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Verify AWS OIDC configuration
-        if: vars.AWS_ROLE_TO_ASSUME == ''
-        run: |
-          echo "::error::Missing repository variable AWS_ROLE_TO_ASSUME. Set it to the ARN of the IAM role trusted by GitHub OIDC."
-          echo "See the Image delivery automation section in README.md."
-          exit 1
 
       - name: Configure AWS credentials through GitHub OIDC
         uses: aws-actions/configure-aws-credentials@v4
