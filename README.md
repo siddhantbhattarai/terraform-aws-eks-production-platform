@@ -114,6 +114,41 @@ to an AWS IAM role trusted by GitHub OIDC and permitted to push to the two ECR
 repositories. Because the EKS API is private, run the final `kubectl` deploy
 from a runner with VPC connectivity.
 
+### One-time GitHub OIDC setup
+
+The image workflow intentionally has no long-lived AWS keys. Before its first
+run, create or reuse the `token.actions.githubusercontent.com` identity
+provider in **AWS Console → IAM → Identity providers**, then create an IAM role
+with the following trust policy. Replace `<ACCOUNT_ID>` only; the repository
+condition prevents another repository from assuming this role.
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": {
+      "Federated": "arn:aws:iam::<ACCOUNT_ID>:oidc-provider/token.actions.githubusercontent.com"
+    },
+    "Action": "sts:AssumeRoleWithWebIdentity",
+    "Condition": {
+      "StringEquals": {
+        "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+      },
+      "StringLike": {
+        "token.actions.githubusercontent.com:sub": "repo:siddhantbhattarai/terraform-aws-eks-production-platform:ref:refs/heads/main"
+      }
+    }
+  }]
+}
+```
+
+Give the role least-privilege ECR push access to
+`eks-platform-production/frontend` and `eks-platform-production/flask-api`.
+Finally open **GitHub repository → Settings → Secrets and variables → Actions
+→ Variables**, add `AWS_ROLE_TO_ASSUME`, and set it to the role ARN. Re-run the
+failed workflow after the ECR repositories have been created by Terraform.
+
 ## Production follow-ups
 
 Add remote state with locking, IAM Identity Center or EKS access entries,
