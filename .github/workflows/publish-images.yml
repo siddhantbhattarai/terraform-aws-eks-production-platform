@@ -1,0 +1,47 @@
+name: Publish application images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "applications/**"
+      - ".github/workflows/publish-images.yml"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials through GitHub OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sign in to Amazon ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: applications/frontend
+          push: true
+          tags: ${{ steps.ecr.outputs.registry }}/eks-platform-production/frontend:${{ env.IMAGE_TAG }}
+
+      - name: Build and push Flask API
+        uses: docker/build-push-action@v6
+        with:
+          context: applications/flask-api
+          push: true
+          tags: ${{ steps.ecr.outputs.registry }}/eks-platform-production/flask-api:${{ env.IMAGE_TAG }}

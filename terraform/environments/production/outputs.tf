@@ -5,3 +5,5 @@ output "cluster_endpoint" {
 }
 output "cluster_security_group_id" { value = module.eks.cluster_security_group_id }
 output "private_subnet_ids" { value = module.network.private_subnet_ids }
+output "frontend_repository_url" { value = module.ecr.frontend_repository_url }
+output "flask_api_repository_url" { value = module.ecr.flask_api_repository_url }

@@ -5,3 +5,5 @@
 *.tfvars
 !terraform.tfvars.example
 tfplan
+__pycache__/
+*.py[cod]

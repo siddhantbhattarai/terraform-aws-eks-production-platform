@@ -10,6 +10,7 @@ provider "aws" {
     for_each = var.use_floci ? [var.floci_endpoint] : []
     content {
       ec2  = endpoints.value
+      ecr  = endpoints.value
       eks  = endpoints.value
       iam  = endpoints.value
       kms  = endpoints.value

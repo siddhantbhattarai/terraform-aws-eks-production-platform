@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="820" viewBox="0 0 1440 820">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#26354a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity=".16"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="820" fill="#f8fafc"/>
+  <text x="720" y="55" font-family="Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle" fill="#16243a">EKS end-to-end web application</text>
+  <text x="720" y="85" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#50627a">Frontend + Flask API · multi-AZ worker nodes · ECR image delivery</text>
+
+  <!-- Control plane -->
+  <g filter="url(#shadow)">
+    <rect x="533" y="120" rx="13" width="374" height="88" fill="#f59e0b"/>
+    <path d="M565 148h28v30h-28z" fill="none" stroke="white" stroke-width="3"/>
+    <path d="M570 143v-7a9 9 0 0 1 18 0v7" fill="none" stroke="white" stroke-width="3"/>
+    <text x="720" y="160" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle" fill="white">Amazon EKS control plane</text>
+    <text x="720" y="185" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">Kubernetes API · scheduling · encrypted secrets</text>
+  </g>
+
+  <!-- ECR -->
+  <g filter="url(#shadow)">
+    <rect x="1080" y="125" rx="13" width="280" height="150" fill="white" stroke="#f59e0b" stroke-width="3"/>
+    <rect x="1102" y="150" width="40" height="40" rx="5" fill="#f59e0b"/>
+    <path d="M1112 160h20M1112 170h20M1112 180h20" stroke="white" stroke-width="3"/>
+    <text x="1225" y="170" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle" fill="#26354a">Amazon ECR</text>
+    <text x="1225" y="205" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#50627a">frontend image</text>
+    <text x="1225" y="232" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#50627a">flask-api image</text>
+  </g>
+
+  <!-- VPC -->
+  <rect x="70" y="260" rx="16" width="1015" height="365" fill="#effaf2" stroke="#2e9b57" stroke-width="3"/>
+  <rect x="92" y="279" rx="6" width="134" height="30" fill="#2e9b57"/>
+  <text x="159" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="white">YOUR VPC</text>
+  <text x="250" y="300" font-family="Arial, sans-serif" font-size="16" fill="#275c3b">Private worker subnets in three Availability Zones</text>
+
+  <!-- AZ 1 -->
+  <g>
+    <rect x="105" y="340" width="275" height="230" rx="8" fill="#fbfdff" stroke="#2f86bb" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="242" y="367" font-family="Arial, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#23658f">Availability Zone 1</text>
+    <rect x="130" y="388" width="225" height="145" rx="9" fill="#fff7ed" stroke="#df7c21" stroke-width="2"/>
+    <text x="242" y="416" font-family="Arial, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#a94f00">Managed worker node</text>
+    <rect x="151" y="440" width="80" height="58" rx="6" fill="#2563eb"/>
+    <text x="191" y="465" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="white">Frontend</text>
+    <text x="191" y="483" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Nginx</text>
+    <rect x="254" y="440" width="80" height="58" rx="6" fill="#16a34a"/>
+    <text x="294" y="465" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="white">Flask API</text>
+    <text x="294" y="483" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">/api</text>
+  </g>
+
+  <!-- AZ 2 -->
+  <g>
+    <rect x="440" y="340" width="275" height="230" rx="8" fill="#fbfdff" stroke="#2f86bb" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="577" y="367" font-family="Arial, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#23658f">Availability Zone 2</text>
+    <rect x="465" y="388" width="225" height="145" rx="9" fill="#fff7ed" stroke="#df7c21" stroke-width="2"/>
+    <text x="577" y="416" font-family="Arial, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#a94f00">Managed worker node</text>
+    <rect x="486" y="440" width="80" height="58" rx="6" fill="#2563eb"/>
+    <text x="526" y="465" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="white">Frontend</text>
+    <text x="526" y="483" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Nginx</text>
+    <rect x="589" y="440" width="80" height="58" rx="6" fill="#16a34a"/>
+    <text x="629" y="465" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="white">Flask API</text>
+    <text x="629" y="483" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">/api</text>
+  </g>
+
+  <!-- AZ 3 -->
+  <g>
+    <rect x="775" y="340" width="275" height="230" rx="8" fill="#fbfdff" stroke="#2f86bb" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="912" y="367" font-family="Arial, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#23658f">Availability Zone 3</text>
+    <rect x="800" y="388" width="225" height="145" rx="9" fill="#fff7ed" stroke="#df7c21" stroke-width="2"/>
+    <text x="912" y="416" font-family="Arial, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#a94f00">Managed worker node</text>
+    <rect x="821" y="440" width="80" height="58" rx="6" fill="#2563eb"/>
+    <text x="861" y="465" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="white">Frontend</text>
+    <text x="861" y="483" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Nginx</text>
+    <rect x="924" y="440" width="80" height="58" rx="6" fill="#16a34a"/>
+    <text x="964" y="465" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="white">Flask API</text>
+    <text x="964" y="483" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">/api</text>
+  </g>
+
+  <!-- User and ALB -->
+  <g filter="url(#shadow)">
+    <circle cx="270" cy="703" r="23" fill="white" stroke="#26354a" stroke-width="3"/>
+    <path d="M230 765c3-30 19-45 40-45s37 15 40 45" fill="white" stroke="#26354a" stroke-width="3"/>
+    <text x="270" y="795" font-family="Arial, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#26354a">User</text>
+    <rect x="480" y="675" width="245" height="75" rx="13" fill="#7c3aed"/>
+    <text x="602" y="708" font-family="Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="white">Application Load Balancer</text>
+    <text x="602" y="731" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white">Ingress → frontend service</text>
+  </g>
+
+  <!-- Connected arrows: control plane to nodes -->
+  <g fill="none" stroke="#26354a" stroke-width="2.5" marker-end="url(#arrow)">
+    <path d="M660 208V235H242V388"/>
+    <path d="M720 208V388"/>
+    <path d="M780 208V235H912V388"/>
+    <path d="M270 680H390V713H480"/>
+    <path d="M602 675V600H242V533"/>
+    <path d="M602 675V600H577V533"/>
+    <path d="M602 675V600H912V533"/>
+    <path d="M1080 200H1045V315H912V388"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="13" fill="#50627a">
+    <text x="355" y="230">manages</text>
+    <text x="390" y="697">HTTPS</text>
+    <text x="744" y="592">routes traffic</text>
+    <text x="1005" y="305">pull images</text>
+  </g>
+</svg>

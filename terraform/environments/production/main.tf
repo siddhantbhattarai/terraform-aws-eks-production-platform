@@ -23,3 +23,9 @@ module "addons" {
   source       = "../../modules/addons"
   cluster_name = module.eks.cluster_name
 }
+
+module "ecr" {
+  source      = "../../modules/ecr"
+  name_prefix = local.name_prefix
+  tags        = local.tags
+}
