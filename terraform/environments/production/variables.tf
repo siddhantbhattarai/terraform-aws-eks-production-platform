@@ -1,0 +1,11 @@
+variable "aws_region" { default = "us-east-1" }
+variable "use_floci" { default = false }
+variable "floci_endpoint" { default = "http://localhost:4566" }
+variable "project_name" { default = "eks-platform" }
+variable "environment" { default = "production" }
+variable "kubernetes_version" { default = "1.31" }
+variable "vpc_cidr" { default = "10.50.0.0/16" }
+variable "node_instance_types" { default = ["t3.large"] }
+variable "node_desired_size" { default = 2 }
+variable "node_min_size" { default = 2 }
+variable "node_max_size" { default = 6 }
